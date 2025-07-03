@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FxzzId Store</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://qu.ax/cFoTS.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 100, 0.3);
+            margin-top: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                rgba(0, 255, 100, 0.1), 
+                rgba(0, 200, 255, 0.1), 
+                rgba(100, 0, 255, 0.1));
+            z-index: -1;
+            border-radius: 20px;
+            animation: borderGlow 8s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+            position: relative;
+        }
+        
+        h1 {
+            color: #4CAF50;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
+            to { text-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.6); }
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            color: #aaa;
+            animation: fadeIn 2s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .product {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .product::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(76, 175, 80, 0.1), 
+                transparent);
+            transition: 0.5s;
+        }
+        
+        .product:hover::after {
+            left: 100%;
+        }
+        
+        .product h2 {
+            color: #4CAF50;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #FF9800;
+            font-size: 1.3em;
+            margin: 15px 0;
+            text-shadow: 0 0 5px rgba(255, 152, 0, 0.3);
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 15px 0;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(76, 175, 80, 0.6);
+        }
+        
+        .buy-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .buy-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .buy-btn:hover::after {
+            left: 100%;
+        }
+        
+        .dropdown-content {
+            display: none;
+            background-color: rgba(40, 40, 40, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            animation: fadeIn 0.5s;
+        }
+        
+        .dropdown-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(85, 85, 85, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .dropdown-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .dropdown-btn {
+            background: rgba(51, 51, 51, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .dropdown-btn:hover {
+            background: rgba(68, 68, 68, 0.8);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(68, 68, 68, 0.5);
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(76, 175, 80, 0.7);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="music-control" onclick="toggleMusic()" title="Toggle Music">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2v20a10 10 0 0 0 0-20zm0 22a12 12 0 1 1 0-24 12 12 0 0 1 0 24z"/>
+        </svg>
+    </div>
+    
+    <div class="container floating">
+        <header>
+            <h1>FxzzId Store</h1>
+            <p class="tagline">Premium Digital Products at Affordable Prices</p>
+        </header>
+        
+        <div class="products">
+            <!-- NOKOS Product -->
+            <div class="product">
+                <h2>[NOKOS]</h2>
+                <div class="price">Rp5.000,00 - Rp20.000,00</div>
+                <p>Various NOKOS options available</p>
+                <button class="dropdown-btn" onclick="toggleDropdown('nokos-dropdown')">
+                    <span>Show Options</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+                <div id="nokos-dropdown" class="dropdown-content">
+                    <div class="dropdown-item">
+                        <h3>[NOKOS INDO FRESH]</h3>
+                        <div class="price">Rp4.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[NOKOS INDO FRESH] Rp4.000,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[NOKOS PHILIPINA FRESH]</h3>
+                        <div class="price">Rp6.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[NOKOS PHILIPINA FRESH] Rp6.000,00')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PANEL PTERODACTYL Product -->
+            <div class="product">
+                <h2>[PANEL PTERODACTYL]</h2>
+                <div class="price">Rp1.000,00 - Rp5.000,00</div>
+                <p>Various Pterodactyl panel options</p>
+                <button class="dropdown-btn" onclick="toggleDropdown('ptero-dropdown')">
+                    <span>Show Options</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+                <div id="ptero-dropdown" class="dropdown-content">
+                    <div class="dropdown-item">
+                        <h3>[1GB | CPU 50%]</h3>
+                        <div class="price">Rp1.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[1GB | CPU 50%] Rp1.000,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[2GB | CPU 100%]</h3>
+                        <div class="price">Rp1.500,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[2GB | CPU 100%] Rp1.500,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[3GB | CPU 150%]</h3>
+                        <div class="price">Rp2.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[3GB | CPU 150%] Rp2.000,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[4GB | CPU 200%]</h3>
+                        <div class="price">Rp2.500,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[4GB | CPU 200%] Rp2.500,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[5GB | CPU 250%]</h3>
+                        <div class="price">Rp3.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[5GB | CPU 250%] Rp3.000,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[6GB | CPU 300%]</h3>
+                        <div class="price">Rp3.500,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[6GB | CPU 300%] Rp3.500,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[7GB | CPU 350%]</h3>
+                        <div class="price">Rp4.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[7GB | CPU 350%] Rp4.000,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[8GB | CPU 400%]</h3>
+                        <div class="price">Rp4.500,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[8GB | CPU 400%] Rp4.500,00')">Buy Now</button>
+                    </div>
+                    <div class="dropdown-item">
+                        <h3>[UNLI | CPU UNLIMITED]</h3>
+                        <div class="price">Rp5.000,00</div>
+                        <button class="buy-btn" onclick="buyProduct('[UNLI | CPU UNLIMITED] Rp5.000,00')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ADMIN PANEL Product -->
+            <div class="product">
+                <h2>[ADMIN PANEL]</h2>
+                <div class="price">Rp10.000,00</div>
+                <p>Admin panel access</p>
+                <button class="buy-btn" onclick="buyProduct('[ADMIN PANEL] Rp10.000,00')">Buy Now</button>
+            </div>
+            
+            <!-- RESELLER PANEL Product -->
+            <div class="product">
+                <h2>[RESELLER PANEL]</h2>
+                <div class="price">Rp5.000,00</div>
+                <p>Reseller panel access</p>
+                <button class="buy-btn" onclick="buyProduct('[RESELLER PANEL] Rp5.000,00')">Buy Now</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 FxzzId Store. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Play background music
+        window.onload = function() {
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.3; // Lower volume
+            music.play().catch(e => console.log("Auto-play prevented:", e));
+        };
+        
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const control = document.querySelector('.music-control');
+            
+            if (music.paused) {
+                music.play();
+                control.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2v20a10 10 0 0 0 0-20zm0 22a12 12 0 1 1 0-24 12 12 0 0 1 0 24z"/></svg>';
+            } else {
+                music.pause();
+                control.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z"/></svg>';
+            }
+        }
+        
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const button = dropdown.previousElementSibling;
+            const svg = button.querySelector('svg');
+            
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+                svg.innerHTML = '<path d="M6 9l6 6 6-6"/>';
+            } else {
+                dropdown.style.display = "block";
+                svg.innerHTML = '<path d="M6 15l6-6 6 6"/>';
+            }
+        }
+        
+        function buyProduct(productName) {
+            const whatsappUrl = https://wa.me/6289676041776?text=Halo,%20saya%20ingin%20membeli%20${encodeURIComponent(productName)};
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
